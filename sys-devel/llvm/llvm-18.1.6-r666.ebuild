@@ -183,8 +183,6 @@ check_distribution_components() {
 }
 
 src_prepare() {
-	eapply "${FILESDIR}/native.patch"
-
 	# disable use of SDK on OSX, bug #568758
 	sed -i -e 's/xcrun/false/' utils/lit/lit/util.py || die
 
@@ -352,6 +350,10 @@ multilib_src_configure() {
 		# Workaround for bug #880677
 		append-flags $(test-flags-CXX -fno-ipa-sra -fno-ipa-modref -fno-ipa-icf)
 	fi
+
+    if use amd64 && tc-is-clang && is-flagq -march=native && tc-cpp-is-true "!defined(__AVX512F__)" ${CXXFLAGS}; then
+        append-flags -mevex512
+    fi
 
 	# ODR violations (bug #917536, bug #926529). Just do it for GCC for now
 	# to avoid people grumbling. GCC is, anecdotally, more likely to miscompile
