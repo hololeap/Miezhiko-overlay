@@ -22,9 +22,8 @@ BDEPEND="
 "
 RDEPEND="${DEPEND}"
 
-PATCHES="${FILESDIR}/make.patch"
-
 src_compile() {
+	export USE_SYS_LIBS=yes
 	emake CC="$(tc-getCC)" CFLAGS="${CFLAGS}" LD="${LD}" LDFLAGS="${LDFLAGS}"
 }
 
