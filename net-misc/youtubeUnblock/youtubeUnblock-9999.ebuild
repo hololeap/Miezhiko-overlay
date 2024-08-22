@@ -30,4 +30,5 @@ src_compile() {
 
 src_install() {
 	emake DESTDIR="${D}" PREFIX="/usr" install
+	newinitd "${FILESDIR}"/youtubeUnblock.initd youtubeUnblock
 }
