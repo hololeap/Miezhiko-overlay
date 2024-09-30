@@ -43,11 +43,6 @@ BDEPEND="dev-util/glib-utils"
 
 DOCS=( AUTHORS ChangeLog NEWS README.md RELEASE )
 
-PATCHES=(
-	"${FILESDIR}"/0001-meson-Fix-libdrm-and-vaapi-configure-checks.patch
-	"${FILESDIR}"/0002-meson-Add-feature-options-for-optional-va-deps-libdr.patch
-)
-
 src_prepare() {
 	default
 	addpredict /dev # Prevent sandbox violations bug #570624
