@@ -8,7 +8,7 @@ inherit cmake xdg
 DESCRIPTION="Qt6-based audio player with winamp/xmms skins support"
 HOMEPAGE="http://qmmp.ylsoftware.com"
 
-SRC_URI="https://qmmp.ylsoftware.com/files/qmmp/2.1/qmmp-${PV}.tar.bz2"
+SRC_URI="https://qmmp.ylsoftware.com/files/qmmp/2.2/qmmp-${PV}.tar.bz2"
 KEYWORDS="amd64 x86"
 
 LICENSE="GPL-2"
