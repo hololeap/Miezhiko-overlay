@@ -53,7 +53,6 @@ DEPEND="
 	>=media-libs/harfbuzz-2.6.0:=
 	>=dev-libs/libei-1.0.901
 	>=media-libs/libdisplay-info-0.2.0
-	>=dev-python/python-dbusmock-0.32.2
 
 	gnome? ( gnome-base/gnome-desktop:4= )
 
@@ -184,10 +183,12 @@ src_configure() {
 		$(meson_use gtk-doc docs)
 		$(meson_use test cogl_tests)
 		$(meson_use test clutter_tests)
+		$(meson_use test mutter_tests)
 		-Dkvm_tests=false
 		-Dtty_tests=false
 		$(meson_use sysprof profiler)
 		-Dinstalled_tests=false
+		-Dtests=disabled
 	)
 
 	if use wayland && use video_cards_nvidia; then
