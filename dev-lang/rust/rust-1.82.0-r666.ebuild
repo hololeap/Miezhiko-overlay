@@ -3,9 +3,10 @@
 
 EAPI=8
 
+LLVM_COMPAT=( 19 )
 PYTHON_COMPAT=( python3_{10..13} )
 
-inherit bash-completion-r1 check-reqs estack flag-o-matic llvm multiprocessing \
+inherit bash-completion-r1 check-reqs estack flag-o-matic llvm-r1 multiprocessing \
 	multilib multilib-build python-any-r1 rust-toolchain toolchain-funcs verify-sig
 
 if [[ ${PV} = *beta* ]]; then
