@@ -1,0 +1,49 @@
+--- a/Makefile
++++ b/Makefile
+@@ -5,24 +5,7 @@ SHELL := bash
+ VERSION := 0.7.0
+ CURL_VERSION := curl-8_7_1
+ 
+-$(CURL_VERSION):
+-	curl -L https://github.com/curl/curl/archive/$(CURL_VERSION).zip -o curl.zip
+-	unzip -q -o curl.zip
+-	mv curl-$(CURL_VERSION) $(CURL_VERSION)
+-
+-curl-impersonate-$(VERSION)/chrome/patches: $(CURL_VERSION)
+-	curl -L "https://github.com/lexiforest/curl-impersonate/archive/refs/tags/v$(VERSION).tar.gz" \
+-		-o "curl-impersonate-$(VERSION).tar.gz"
+-	tar -xf curl-impersonate-$(VERSION).tar.gz
+-
+-.preprocessed: curl-impersonate-$(VERSION)/chrome/patches
+-	cd $(CURL_VERSION)
+-	for p in $</curl-*.patch; do patch -p1 < ../$$p; done
+-	# Re-generate the configure script
+-	autoreconf -fi
+-	mkdir -p ../include/curl
+-	cp -R include/curl/* ../include/curl/
+-	# Sentinel files: https://tech.davis-hansson.com/p/make/
++.preprocessed:
+ 	touch .preprocessed
+ 
+ local-curl: $(CURL_VERSION)
+--- a/scripts/build.py
++++ b/scripts/build.py
+@@ -40,6 +40,7 @@ def detect_arch():
+                 global tmpdir
+                 tmpdir = tempfile.TemporaryDirectory()
+                 arch["libdir"] = tmpdir.name
++            arch["link_type"] = "dynamic"
+             return arch
+     raise Exception(f"Unsupported arch: {uname}")
+ 
+@@ -103,7 +104,6 @@ def get_curl_libraries():
+ ffibuilder = FFI()
+ system = platform.system()
+ root_dir = Path(__file__).parent.parent
+-download_libcurl()
+ 
+ 
+ ffibuilder.set_source(
+-- 
+2.45.2
+
