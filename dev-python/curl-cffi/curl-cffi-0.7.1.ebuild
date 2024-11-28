@@ -9,12 +9,12 @@ DISTUTILS_USE_PEP517=setuptools
 
 inherit distutils-r1 pypi
 
-SRC_URI="https://github.com/yifeikong/curl_cffi/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/lexiforest/curl_cffi/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
 
 S="${WORKDIR}/curl_cffi-${PV}"
 
 DESCRIPTION="Python binding for curl-impersonate via cffi"
-HOMEPAGE="https://github.com/yifeikong/curl_cffi"
+HOMEPAGE="https://github.com/lexiforest/curl_cffi"
 
 LICENSE="MIT"
 SLOT="0"
