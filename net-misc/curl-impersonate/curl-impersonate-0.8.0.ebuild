@@ -21,3 +21,10 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}"
 
+src_compile() {
+	emake chrome-build
+}
+
+src_install() {
+	emake DESTDIR="${D}" chrome-install
+}
